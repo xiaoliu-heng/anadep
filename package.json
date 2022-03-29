@@ -1,7 +1,6 @@
 {
   "name": "anadep",
-  "version": "1.0.1",
-  "description": "",
+  "version": "1.0.2",
   "main": "index.js",
   "bin": {
     "anadep": "index.js"
@@ -9,7 +8,26 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "xiaoliu-heng",
+  "description": "A lib can help you find all dependencies for the js file, also jsx,ts,tsx file.",
+  "keywords": [
+    "ast",
+    "dependencies",
+    "js",
+    "jsx",
+    "ts",
+    "tsx",
+    "analyze-dependencies"
+  ],
+  "homepage": "https://github.com/xiaoliu-heng/anadep#readme",
+  "bugs": {
+    "url": "https://github.com/xiaoliu-heng/anadep/issues",
+    "email": "issues@xiaoliublog.cn"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaoliu-heng/anadep.git"
+  },
   "license": "ISC",
   "dependencies": {
     "@babel/parser": "^7.17.8",
