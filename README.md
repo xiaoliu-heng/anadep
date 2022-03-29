@@ -28,4 +28,4 @@ look at http://localhost:5555
 then open [http://localhost:5555](http://localhost:5555) in the browser,
 you can double click on the graph node to open it in vscode.
 
-![Demo image](//cdn.xiaoliublog.cn/19af29f3-5113-4a86-bfbe-453ce9bd5471.jpg?width=undefined&height=undefined "demo")
+![Demo image](https://cdn.xiaoliublog.cn/19af29f3-5113-4a86-bfbe-453ce9bd5471.jpg?width=undefined&height=undefined "demo")
