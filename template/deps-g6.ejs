@@ -52,7 +52,7 @@
   <body>
     <div class="desc">
       <span>Total file: <%= total %></span>
-      <ol class="list">
+      <ol class="list" id="fileList">
         <% files.forEach(file => { %>
         <li><%- file %></li>
         <% }) %>
@@ -69,13 +69,10 @@
 
     <% if (data) { %>
     <script>
-      // 定义数据源
       const graphData = <%- data %>;
 
-      // 创建 G6 图实例
       const graph = new G6.Graph({
-        container: "mountNode", // 指定图画布的容器 id，与第 9 行的容器对应
-        // 画布宽高
+        container: "mountNode",
         width: window.innerWidth,
         height: window.innerHeight,
         layout: {
@@ -92,14 +89,20 @@
         openFileInCode(file);
       });
 
-      // 读取数据
       graph.data(graphData);
-      // 渲染图
       graph.render();
 
       setTimeout(() => {
         graph.fitView(20);
       });
+
+      fileList.addEventListener('click',(e)=>{
+        const file = e.target.innerText;
+        graph.focusItem(file, true, {
+          easing: 'easeCubic',
+          duration: 400,
+        });
+      })
     </script>
     <% } %>
 
