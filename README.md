@@ -1,6 +1,6 @@
 # <center>anadep</center>
 
-> A lib can help you find all dependencies for the `js` file, also `jsx`,`ts`,`tsx` file.
+> A lib can help you find all dependencies of the `js` file, also `jsx`,`ts`,`tsx` file.
 
 ## Install
 

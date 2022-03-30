@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "xiaoliu-heng",
-  "description": "A lib can help you find all dependencies for the js file, also jsx,ts,tsx file.",
+  "description": "A lib can help you find all dependencies of the js file, also jsx,ts,tsx file.",
   "keywords": [
     "ast",
     "dependencies",
