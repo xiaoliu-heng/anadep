@@ -1,6 +1,6 @@
 {
   "name": "anadep",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "index.js",
   "bin": {
     "anadep": "index.js"
@@ -32,6 +32,7 @@
   "dependencies": {
     "@babel/parser": "^7.17.8",
     "ejs": "^3.1.6",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "yargs": "^17.4.0"
   }
 }

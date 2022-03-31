@@ -1,51 +1,51 @@
 #! /usr/bin/env node
 const fs = require("fs");
-const path = require("path");
-const { parse } = require("@babel/parser");
+const yargs = require("yargs");
 
-const { getRealPath, toG6Data: toG6 } = require("./utils");
-const { exts } = require("./constants");
+const { parse } = require("./utils");
 const { startServer } = require("./monitor");
 
-const map = new Map();
+const main = (args) => {
+  const { file, port, output } = args;
+  if (!fs.existsSync(file)) return;
+  const map = new Map();
+  parse(file, map);
 
-const main = (entryPath) => {
-  if (!fs.existsSync(entryPath)) return;
-  parser(getRealPath(entryPath));
-  startServer(map, entryPath);
-};
-
-const parser = (filePath) => {
-  if (filePath === null) return;
-  if (map.has(filePath)) return;
-
-  const ext = path.extname(filePath);
-  if (!exts.includes(ext)) return;
-  const fileContent = fs.readFileSync(filePath).toString();
-  const ast = parse(fileContent, {
-    sourceType: "module",
-    plugins: ["jsx", "typescript", "decorators-legacy"],
-  });
-
-  let nodes;
-  if (ast.type === "File") {
-    nodes = ast.program.body;
-  } else if (ast.type === "Program") {
-    nodes = ast.body;
-  }
-
-  const imports = [];
-  nodes.forEach((node) => {
-    if (node.type === "ImportDeclaration") {
-      if ([".", "@/"].some((prefix) => node.source.value.startsWith(prefix))) {
-        imports.push(
-          getRealPath(path.resolve(path.dirname(filePath), node.source.value))
-        );
-      }
+  if (output) {
+    if (output === "json") {
+      fs.writeFileSync("output.json", JSON.stringify(Object.fromEntries(map)));
+    } else if (output === "stdout") {
+      const allFiles = [
+        ...new Set([...map.keys(), ...[...map.values()].flat()]),
+      ];
+      console.log(allFiles.join("\n"));
     }
-  });
-  map.set(filePath, imports);
-  imports.forEach((imported) => parser(imported));
+  } else {
+    startServer(map, { file, port });
+  }
 };
 
-main(process.argv[2]);
+yargs(process.argv.slice(2))
+  .command(
+    "$0 <file>",
+    "parse file",
+    (yargs) =>
+      yargs.positional("file", {
+        describe: "file path",
+        type: "string",
+      }),
+    (argv) => main(argv)
+  )
+  .option("port", {
+    alias: "p",
+    describe: "server port",
+    default: 5555,
+  })
+  .option("output", {
+    alias: "o",
+    describe: "output format",
+    choices: ["json", "stdout"],
+  })
+  .help()
+  .alias("help", "h")
+  .parse();
