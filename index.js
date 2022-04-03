@@ -26,12 +26,13 @@ const main = (args) => {
 };
 
 yargs(process.argv.slice(2))
+  .scriptName("anadep")
   .command(
-    "$0 <file>",
-    "parse file",
+    "$0 <file> [option]",
+    "analyze file",
     (yargs) =>
       yargs.positional("file", {
-        describe: "file path",
+        describe: "path to target file",
         type: "string",
       }),
     (argv) => main(argv)

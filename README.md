@@ -24,12 +24,12 @@ npx anadep [file]
 
 ```bash
 $ anadep help
-index.js <file>
+anadep <file> [option]
 
-parse file
+analyze file
 
 Positionals:
-  file  file path                                                       [string]
+  file  path to target file                                             [string]
 
 Options:
       --version  Show version number                                   [boolean]
